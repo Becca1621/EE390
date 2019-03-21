@@ -1,1 +1,1 @@
-EE390
+The Header files in this repository are intended for use with the STM32L475VGT6 Micro controller. It can be used with the other STM32 microcontrollers but some of the register addresses and some of the #include statements may have to be changed.
