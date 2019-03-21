@@ -89,10 +89,9 @@ float LIS3MDL_Read_OUT_X(I2C_HandleTypeDef i2cHandle) {
 	
 	int value = (out_x_h<<8 | out_x_l);
 	
-	//Shift value to (-) value and take absolute value
+	//Shift value to (-) value 
 	if (value > 32768) {
 		value -= 65536;
-		value *= -1;
 	}
 	
 	return (float)value / (float)GN;
@@ -104,10 +103,9 @@ float LIS3MDL_Read_OUT_Y(I2C_HandleTypeDef i2cHandle) {
 	
 	int value = (out_y_h<<8 | out_y_l);
 	
-	//Shift value to (-) value and take absolute value
+	//Shift value to (-) value
 	if (value > 32768) {
 		value -= 65536;
-		value *= -1;
 	}
 	
 	return (float)value / (float)GN;
@@ -119,10 +117,9 @@ float LIS3MDL_Read_OUT_Z(I2C_HandleTypeDef i2cHandle) {
 	
 	int value = (out_z_h<<8 | out_z_l);
 	
-	//Shift value to (-) value and take absolute value
+	//Shift value to (-) value
 	if (value > 32768) {
 		value -= 65536;
-		value *= -1;
 	}
 	
 	return (float)value / (float)GN;
