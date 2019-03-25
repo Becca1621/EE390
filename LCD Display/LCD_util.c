@@ -2,6 +2,7 @@
 #include "LCD_util.h"
 #include "USART1_util.h"
 
+//Commands
 #define LCD_WRITE_ADDRESS 0x4E
 #define LCD_CLEAR_DISPLAY 0x01
 #define LCD_RETURN_HOME 0x02
@@ -12,18 +13,30 @@
 #define LCD_DISPLAY_OFF_CURSOR_OFF 0x08
 #define LCD_DISPLAY_OFF_CURSOR_ON 0x0A
 #define LCD_DISPLAY_ON_CURSOR_OFF 0x0C
-
-
+#define LCD_DISPLAY_ON_CURSOR_BLINKING1 0x0E
+#define LCD_DISPLAY_ON_CURSOR_BLINKING2 0x0F
+#define LCD_SHIFT_CURSOR_LEFT 0x10
+#define LCD_SHIFT_CURSOR_RIGHT 0x14
+#define LCD_ENTIRE_DISPLAY_LEFT 0x18
+#define LCD_ENTIRE_DISPLAY_RIGHT 0x1C
+#define LCD_FORCE_CURSOR_BEGINNING_1 0x80
+#define LCD_FORCE_CURSOR_BEGINNING_2 0xC0
+#define LCD_5x7_4BITMODE 0x28
+#define LCD_5x7_8BITMODE 0x38
 
 
 uint8_t buffer[4];
 
 void LCD_init(I2C_HandleTypeDef i2cHandle) {
-	LCD_send_cmd(i2cHandle, 0x01);
-	LCD_send_cmd(i2cHandle, 0x02); //DB1 - Cursor Home
-	LCD_send_cmd(i2cHandle, 0x28); //DB5, DB3 
-	LCD_send_cmd(i2cHandle, 0x0c); //
-	LCD_send_cmd(i2cHandle, 0x80); //Force cursor to 1st line
+	LCD_clear(i2cHandle);
+	LCD_send_cmd(i2cHandle, LCD_RETURN_HOME); //DB1 - Cursor Home
+	LCD_send_cmd(i2cHandle, LCD_5x7_4BITMODE); //DB5, DB3 
+	LCD_send_cmd(i2cHandle, LCD_DISPLAY_ON_CURSOR_OFF); //
+	LCD_send_cmd(i2cHandle, LCD_FORCE_CURSOR_BEGINNING_1); //Force cursor to 1st line
+}
+
+void LCD_clear(I2C_HandleTypeDef i2cHandle) {
+	LCD_send_cmd(i2cHandle, LCD_CLEAR_DISPLAY);
 }
 
 void LCD_send_string(I2C_HandleTypeDef i2cHandle, char* str) {
