@@ -105,7 +105,7 @@ float LIS3MDL_Read_OUT_Y(I2C_HandleTypeDef i2cHandle) {
 	
 	uint16_t z = 0;
 	uint16_t value;
-	valeu  = ((out_y_h | z)<<8 | out_y_l);
+	value  = ((out_y_h | z)<<8 | out_y_l);
 	
 	//Shift value to (-) value
 	if (value > 32768) {
@@ -146,5 +146,3 @@ uint8_t LIS3MDL_Read8bit(I2C_HandleTypeDef i2cHandle, unsigned char reg) {
 	
 	return buffer[0];
 }
-
-
