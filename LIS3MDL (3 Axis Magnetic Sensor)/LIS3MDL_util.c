@@ -1,7 +1,7 @@
 #include "stm32l4xx_hal.h"
 #include "LIS3MDL_util.h"
 
-unsigned char LIS3MDL_WRITE_ADDRESS = 0x3C;
+#define LIS3MDL_WRITE_ADDRESS 0x3C
 #define LIS3MDL_READ_ADDRESS 0x3D
 #define WHO_AM_I 0x0F
 #define CTRL_REG1 0x20
